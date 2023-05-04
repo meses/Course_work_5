@@ -25,22 +25,94 @@ class DB_Saver():
 
         return conn, cur
 
-    def write(self, data: dict):
-        pass
-
-    def delete(self, data: dict):
-        pass
-
-    def read(self):
-        connection, cur = self.connect_to_db()
+    def write_employers(self, data: list):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+                                      port="5432",
+                                      dbname="course_work_5",
+                                      user="postgres",
+                                      password="cnmeses")
         with connection:
             with connection.cursor() as cur:
-                cur.execute("select * from vacancy")
+                print('Начинаем вставку')
+                cur.executemany("insert into employers (id, name, url, description) values (%s, %s, %s, %s)", data)
+                connection.commit()
+                print('Вставка завершена')
+        connection.close()
+
+    def write_vacancies(self, data: list):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+                                      port="5432",
+                                      dbname="course_work_5",
+                                      user="postgres",
+                                      password="cnmeses")
+        with connection:
+            with connection.cursor() as cur:
+                print('Начинаем вставку')
+                cur.executemany("insert into vacancy (id, name, salary_from, salary_to, emlployer_id, url, currency, requirement, responsibility) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)", data)
+                connection.commit()
+                print('Вставка завершена')
+        connection.close()
+
+    def delete_employers(self):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+                                      port="5432",
+                                      dbname="course_work_5",
+                                      user="postgres",
+                                      password="cnmeses")
+        with connection:
+            with connection.cursor() as cur:
+                print('Начинаем удаление')
+                cur.execute("delete from employers")
+                connection.commit()
+                print('Удаление завершено')
+        connection.close()
+
+    def delete_vacancy(self):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+                                      port="5432",
+                                      dbname="course_work_5",
+                                      user="postgres",
+                                      password="cnmeses")
+        with connection:
+            with connection.cursor() as cur:
+                print('Начинаем удаление')
+                cur.execute("delete from vacancy")
+                connection.commit()
+                print('Удаление завершено')
+        connection.close()
+
+    def delete_all(self):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+                                      port="5432",
+                                      dbname="course_work_5",
+                                      user="postgres",
+                                      password="cnmeses")
+        with connection:
+            with connection.cursor() as cur:
+                print('Начинаем удаление')
+                cur.execute("delete from employers")
+                cur.execute("delete from vacancy")
+                connection.commit()
+                print('Удаление завершено')
+        connection.close()
+
+    def read(self):
+        #connection, cur = self.connect_to_db()
+        connection = psycopg2.connect(host="localhost",
+            port="5432",
+            dbname="course_work_5",
+            user="postgres",
+            password="cnmeses")
+        with connection:
+            with connection.cursor() as cur:
+                cur.execute("select * from employers")
                 vac_info = cur.fetchone()
                 print(vac_info)
         connection.close()
-
-
-test_db_read = DB_Saver().read()
 
 
