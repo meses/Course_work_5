@@ -28,12 +28,7 @@ class DB_Saver():
 
     def write_employers(self, data: list):
         """Записывает данные в таблицу employers"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-                                      port="5432",
-                                      dbname="course_work_5",
-                                      user="postgres",
-                                      password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 print('Начинаем вставку')
@@ -44,12 +39,7 @@ class DB_Saver():
 
     def write_vacancies(self, data: list):
         """Записывает данные в таблицу vacancy"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-                                      port="5432",
-                                      dbname="course_work_5",
-                                      user="postgres",
-                                      password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 print('Начинаем вставку')
@@ -60,12 +50,7 @@ class DB_Saver():
 
     def delete_employers(self):
         """Удаляет данные из таблицы employers"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-                                      port="5432",
-                                      dbname="course_work_5",
-                                      user="postgres",
-                                      password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 print('Начинаем удаление')
@@ -76,12 +61,7 @@ class DB_Saver():
 
     def delete_vacancy(self):
         """Удаляет данные из таблицы vacancy"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-                                      port="5432",
-                                      dbname="course_work_5",
-                                      user="postgres",
-                                      password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 print('Начинаем удаление')
@@ -92,12 +72,7 @@ class DB_Saver():
 
     def delete_all(self):
         """Удаляет данные из таблиц employers и vacancy"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-                                      port="5432",
-                                      dbname="course_work_5",
-                                      user="postgres",
-                                      password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 print('Начинаем удаление')
@@ -109,17 +84,11 @@ class DB_Saver():
 
     def read(self):
         """Чтение данных. Используется для тестов"""
-        #connection, cur = self.connect_to_db()
-        connection = psycopg2.connect(host="localhost",
-            port="5432",
-            dbname="course_work_5",
-            user="postgres",
-            password="cnmeses")
+        connection, cur = self.connect_to_db()
         with connection:
             with connection.cursor() as cur:
                 cur.execute("select * from employers")
                 vac_info = cur.fetchone()
                 print(vac_info)
         connection.close()
-
 
