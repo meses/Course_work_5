@@ -1,6 +1,6 @@
 """Работа с API"""
 from abc import ABC, abstractmethod
-from utils.utils import set_correct_salary_from, set_correct_salary_to, set_correct_currency, set_correct_salary_hh
+from utils.utils import set_correct_salary_from, set_correct_salary_to, set_correct_currency
 import requests
 import os
 import json
@@ -13,7 +13,7 @@ class ABCEngine(ABC):
         pass
 
     @abstractmethod
-    def get_requests(self, vacancy_name: str = ''):
+    def get_requests(self, vacancy_name):
         pass
 
     @staticmethod
@@ -47,11 +47,11 @@ class HeadHunter(ABCEngine):
         item_dict['responsibility'] = item['snippet']['responsibility']
         return item_dict
 
-    def get_requests(self, employers_id = 'Разработчик'):
+    def get_requests(self, employers_id):
         """Функция для получения вакансий с HH с заданным поисковым запосом"""
         #self.employers_id = employers_id
         data = {'items':[]}
-        for i in range(1, 11):
+        for i in range(1, 21):
             response = requests.get(self.url, params = {'User-Agent': 'Mozilla/5.0',
                                                         'area': 113,
                                                         'per_page': 100,
@@ -75,19 +75,4 @@ class HeadHunter(ABCEngine):
             data['url'] = jsObj['alternate_url']
             data['description'] = jsObj['description']
             return data
-
-
-emp_id = ['2492', '5974128', '586', '590', '599', '533', '490', '399', '330', '272', '229', '211', '139', '89', '80', '65', '59']
-'''
-test_hh = HeadHunter().get_requests(emp_id)
-for i in test_hh['items']:
-    print(i['employer'])
-'''
-#for i in emp_id:
-#    test_company = HeadHunter().get_company_info(i)
-#    print(test_company)
-
-test_hh_vac = HeadHunter().get_requests(emp_id)
-for i in test_hh_vac['items']:
-    print(i)
 
