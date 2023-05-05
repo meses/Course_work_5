@@ -6,6 +6,7 @@ class DB_Saver():
     """Отвечает за сохранение и удаление данных в БД"""
 
     def connect_to_db(self, config_file="config.ini"):
+        """Функция для установления соединения с БД"""
         config = configparser.ConfigParser()
         config.read(config_file)
         host = config['postgresql']['host']
@@ -26,6 +27,7 @@ class DB_Saver():
         return conn, cur
 
     def write_employers(self, data: list):
+        """Записывает данные в таблицу employers"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
                                       port="5432",
@@ -41,6 +43,7 @@ class DB_Saver():
         connection.close()
 
     def write_vacancies(self, data: list):
+        """Записывает данные в таблицу vacancy"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
                                       port="5432",
@@ -56,6 +59,7 @@ class DB_Saver():
         connection.close()
 
     def delete_employers(self):
+        """Удаляет данные из таблицы employers"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
                                       port="5432",
@@ -71,6 +75,7 @@ class DB_Saver():
         connection.close()
 
     def delete_vacancy(self):
+        """Удаляет данные из таблицы vacancy"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
                                       port="5432",
@@ -86,6 +91,7 @@ class DB_Saver():
         connection.close()
 
     def delete_all(self):
+        """Удаляет данные из таблиц employers и vacancy"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
                                       port="5432",
@@ -102,6 +108,7 @@ class DB_Saver():
         connection.close()
 
     def read(self):
+        """Чтение данных. Используется для тестов"""
         #connection, cur = self.connect_to_db()
         connection = psycopg2.connect(host="localhost",
             port="5432",
