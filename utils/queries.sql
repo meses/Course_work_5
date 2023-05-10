@@ -3,7 +3,7 @@ CREATE TABLE public.employers (
 	id integer NOT NULL,
 	"name" varchar(256) NULL,
 	url varchar(256) NULL,
-	description text NULL
+	description text NULL,
 	CONSTRAINT employers_pk PRIMARY KEY (id)
 );
 COMMENT ON TABLE public.employers IS 'Компании';
